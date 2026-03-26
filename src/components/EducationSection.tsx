@@ -1,14 +1,25 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Award } from "lucide-react";
 
+const slideUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" },
+  }),
+};
+
 const EducationSection = () => {
   return (
     <section id="education" className="py-24 bg-card">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={slideUp}
+          custom={0}
           className="mb-12"
         >
           <p className="section-subtitle">Background</p>
@@ -18,9 +29,11 @@ const EducationSection = () => {
 
         <div className="grid md:grid-cols-2 gap-6 max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={slideUp}
+            custom={1}
             className="bg-background border border-border rounded-xl p-6"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
@@ -33,10 +46,11 @@ const EducationSection = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={slideUp}
+            custom={2}
             className="bg-background border border-border rounded-xl p-6"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
