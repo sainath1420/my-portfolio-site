@@ -1,41 +1,57 @@
 import { motion } from "framer-motion";
-import { Code, Database, Brain, Wrench } from "lucide-react";
+import devIllustration from "@/assets/developer-illustration.png";
 
-const skills = [
+const skillCategories = [
   {
-    icon: Code,
     title: "Backend Development",
-    description: "Building scalable RESTful APIs and microservices using FastAPI, Docker, Celery, and Kafka with async Python.",
-    tags: ["Python", "FastAPI", "TypeScript", "React"],
+    description: "I build scalable and maintainable backend applications using cutting-edge technologies like FastAPI, Docker, Celery, Kafka, and PostgreSQL.",
+    tags: ["Python", "FastAPI", "Django", "Celery", "Kafka", "Docker"],
   },
   {
-    icon: Brain,
-    title: "Generative AI",
-    description: "Developing AI-driven solutions with Agentic AI, multi-agent orchestration, RAG pipelines, MCPs, and LLM integrations.",
-    tags: ["LangChain", "Agno", "OpenAI", "Claude", "Gemini"],
-  },
-  {
-    icon: Database,
-    title: "Databases",
-    description: "Strong expertise in SQL and vector databases, designing efficient schemas for enterprise applications.",
-    tags: ["PostgreSQL", "MySQL", "Neo4j", "Vector DB", "Supabase"],
-  },
-  {
-    icon: Wrench,
-    title: "DevOps & Tools",
-    description: "Containerization, background processing, and CI/CD pipelines for efficient deployments.",
-    tags: ["Docker", "Celery", "Git", "Pytest", "SQLAlchemy"],
+    title: "Generative AI Solutions",
+    description: "I develop AI-driven solutions with Agentic AI, multi-agent orchestration, RAG pipelines, MCPs, and LLM integrations for enterprise applications.",
+    tags: ["LangChain", "Agno", "OpenAI", "Claude", "Gemini", "RAG"],
   },
 ];
+
+const techLogos = [
+  { name: "Python", icon: "🐍", color: "#3776AB" },
+  { name: "FastAPI", icon: "⚡", color: "#009688" },
+  { name: "Docker", icon: "🐳", color: "#2496ED" },
+  { name: "PostgreSQL", icon: "🐘", color: "#4169E1" },
+  { name: "LangChain", icon: "🔗", color: "#1C3C3C" },
+  { name: "OpenAI", icon: "🤖", color: "#412991" },
+  { name: "Git", icon: "📦", color: "#F05032" },
+  { name: "React", icon: "⚛️", color: "#61DAFB" },
+  { name: "Celery", icon: "🌿", color: "#37814A" },
+  { name: "Neo4j", icon: "🔵", color: "#008CC1" },
+  { name: "MySQL", icon: "💾", color: "#4479A1" },
+  { name: "Pytest", icon: "🧪", color: "#009FE3" },
+  { name: "SQLAlchemy", icon: "🗄️", color: "#D71F00" },
+  { name: "Kafka", icon: "📡", color: "#231F20" },
+  { name: "Supabase", icon: "⚡", color: "#3ECF8E" },
+  { name: "TypeScript", icon: "📘", color: "#3178C6" },
+];
+
+const slideUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" },
+  }),
+};
 
 const SkillsSection = () => {
   return (
     <section id="skills" className="py-24">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={slideUp}
+          custom={0}
           className="mb-12"
         >
           <p className="section-subtitle">What I Do</p>
@@ -43,31 +59,82 @@ const SkillsSection = () => {
           <div className="accent-line mt-4" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {skills.map((skill, i) => (
+        {/* Skills with illustration - Kenneth Jimmy style */}
+        <div className="bg-card border border-border rounded-xl p-8 md:p-12 mb-12">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-8">
+              {skillCategories.map((cat, i) => (
+                <motion.div
+                  key={cat.title}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={slideUp}
+                  custom={i + 1}
+                >
+                  <h3 className="text-lg font-bold font-heading text-muted-foreground uppercase tracking-wide mb-3">
+                    {cat.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {cat.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
             <motion.div
-              key={skill.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-card border border-border rounded-xl p-6 hover:shadow-lg hover:border-primary/30 transition-all duration-300"
+              variants={slideUp}
+              custom={2}
+              className="flex justify-center"
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <skill.icon size={24} className="text-primary" />
-              </div>
-              <h3 className="text-xl font-bold font-heading text-foreground mb-2">{skill.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-4">{skill.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {skill.tags.map((tag) => (
-                  <span key={tag} className="text-xs font-medium bg-secondary text-secondary-foreground px-3 py-1 rounded-full">
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              <img
+                src={devIllustration}
+                alt="Developer at work"
+                className="w-full max-w-md"
+                loading="lazy"
+                width={800}
+                height={800}
+              />
             </motion.div>
-          ))}
+          </div>
         </div>
+
+        {/* Tech logos - grey, color on hover */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={slideUp}
+          custom={0}
+        >
+          <p className="text-sm italic text-muted-foreground mb-6">
+            Technologies I use for building scalable backend & AI applications
+          </p>
+          <div className="bg-card border border-border rounded-xl p-8">
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+              {techLogos.map((tech, i) => (
+                <motion.div
+                  key={tech.name}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={slideUp}
+                  custom={i * 0.05}
+                  className="group flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary text-muted-foreground 
+                    grayscale hover:grayscale-0 hover:bg-secondary/80 transition-all duration-300 cursor-default"
+                  style={{ "--hover-color": tech.color } as React.CSSProperties}
+                >
+                  <span className="text-lg">{tech.icon}</span>
+                  <span className="text-sm font-medium group-hover:text-foreground transition-colors duration-300">
+                    {tech.name}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
