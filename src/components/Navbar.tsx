@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 
 const navItems = [
   { label: "Skills", href: "#skills" },
@@ -19,7 +19,13 @@ const Navbar = () => {
           <span className="text-primary">S</span>ainath
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
+          <a
+            href="mailto:kasisainath14@gmail.com"
+            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+          >
+            ✉ kasisainath14@gmail.com
+          </a>
           {navItems.map((item) => (
             <a
               key={item.label}
@@ -30,10 +36,11 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="mailto:kasisainath14@gmail.com"
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+            href="#experience"
+            className="flex items-center gap-1.5 text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 transition-opacity"
           >
-            ✉ kasisainath14@gmail.com
+            <FileText size={14} />
+            Resume
           </a>
         </div>
 
@@ -57,6 +64,13 @@ const Navbar = () => {
               {item.label}
             </a>
           ))}
+          <a
+            href="#experience"
+            onClick={() => setIsOpen(false)}
+            className="block px-6 py-2 text-sm text-primary font-medium"
+          >
+            📄 Resume
+          </a>
         </div>
       )}
     </nav>
