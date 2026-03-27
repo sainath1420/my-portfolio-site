@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, FileText } from "lucide-react";
 
 const navItems = [
@@ -11,12 +11,34 @@ const navItems = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map((item) => item.href.replace("#", ""));
+      let current = "";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120) {
+            current = id;
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container flex items-center justify-between h-16">
         <a href="#" className="font-heading text-xl font-bold text-foreground tracking-tight">
           <span className="text-primary">S</span>ainath
+          <span className="text-primary">V</span>innakota
         </a>
 
         <div className="hidden md:flex items-center gap-6">
@@ -30,7 +52,11 @@ const Navbar = () => {
             <a
               key={item.label}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className={`text-sm font-medium transition-colors ${
+                activeSection === item.href.replace("#", "")
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {item.label}
             </a>
@@ -59,7 +85,11 @@ const Navbar = () => {
               key={item.label}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="block px-6 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className={`block px-6 py-2 text-sm transition-colors ${
+                activeSection === item.href.replace("#", "")
+                  ? "text-primary font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {item.label}
             </a>
