@@ -1,5 +1,11 @@
 import { motion } from "framer-motion";
-import devIllustration from "@/assets/developer-illustration.png";
+import DevIllustration from "@/components/DevIllustration";
+import {
+  PythonIcon, FastAPIIcon, DockerIcon, PostgreSQLIcon,
+  LangChainIcon, AgnoIcon, StrandsIcon, AWSIcon,
+  OpenAIIcon, GitIcon, SupabaseIcon, KafkaIcon,
+  PipecatIcon, RAGASIcon, SarvamIcon,
+} from "@/components/TechIcons";
 
 const skillCategories = [
   {
@@ -15,22 +21,21 @@ const skillCategories = [
 ];
 
 const techLogos = [
-  { name: "Python", icon: "🐍", color: "#3776AB" },
-  { name: "FastAPI", icon: "⚡", color: "#009688" },
-  { name: "Docker", icon: "🐳", color: "#2496ED" },
-  { name: "PostgreSQL", icon: "🐘", color: "#4169E1" },
-  { name: "LangChain", icon: "🔗", color: "#1C3C3C" },
-  { name: "OpenAI", icon: "🤖", color: "#412991" },
-  { name: "Git", icon: "📦", color: "#F05032" },
-  { name: "React", icon: "⚛️", color: "#61DAFB" },
-  { name: "Celery", icon: "🌿", color: "#37814A" },
-  { name: "Neo4j", icon: "🔵", color: "#008CC1" },
-  { name: "MySQL", icon: "💾", color: "#4479A1" },
-  { name: "Pytest", icon: "🧪", color: "#009FE3" },
-  { name: "SQLAlchemy", icon: "🗄️", color: "#D71F00" },
-  { name: "Kafka", icon: "📡", color: "#231F20" },
-  { name: "Supabase", icon: "⚡", color: "#3ECF8E" },
-  { name: "TypeScript", icon: "📘", color: "#3178C6" },
+  { name: "Python", Icon: PythonIcon, color: "#3776AB" },
+  { name: "FastAPI", Icon: FastAPIIcon, color: "#009688" },
+  { name: "Docker", Icon: DockerIcon, color: "#2496ED" },
+  { name: "PostgreSQL", Icon: PostgreSQLIcon, color: "#4169E1" },
+  { name: "LangChain", Icon: LangChainIcon, color: "#1C3C3C" },
+  { name: "Agno", Icon: AgnoIcon, color: "#6C5CE7" },
+  { name: "Strands", Icon: StrandsIcon, color: "#FF6B35" },
+  { name: "AWS", Icon: AWSIcon, color: "#FF9900" },
+  { name: "OpenAI", Icon: OpenAIIcon, color: "#412991" },
+  { name: "Git", Icon: GitIcon, color: "#F05032" },
+  { name: "Supabase", Icon: SupabaseIcon, color: "#3ECF8E" },
+  { name: "Pipecat", Icon: PipecatIcon, color: "#FF4081" },
+  { name: "RAGAS", Icon: RAGASIcon, color: "#009FE3" },
+  { name: "Kafka", Icon: KafkaIcon, color: "#231F20" },
+  { name: "Sarvam", Icon: SarvamIcon, color: "#E65100" },
 ];
 
 const slideUp = {
@@ -59,7 +64,6 @@ const SkillsSection = () => {
           <div className="accent-line mt-4" />
         </motion.div>
 
-        {/* Skills with illustration - Kenneth Jimmy style */}
         <div className="bg-card border border-border rounded-xl p-8 md:p-12 mb-12">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-8">
@@ -84,19 +88,12 @@ const SkillsSection = () => {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               variants={slideUp}
               custom={2}
               className="flex justify-center"
             >
-              <img
-                src={devIllustration}
-                alt="Developer at work"
-                className="w-full max-w-md"
-                loading="lazy"
-                width={800}
-                height={800}
-              />
+              <DevIllustration />
             </motion.div>
           </div>
         </div>
@@ -124,9 +121,8 @@ const SkillsSection = () => {
                   custom={i * 0.05}
                   className="group flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary text-muted-foreground 
                     grayscale hover:grayscale-0 hover:bg-secondary/80 transition-all duration-300 cursor-default"
-                  style={{ "--hover-color": tech.color } as React.CSSProperties}
                 >
-                  <span className="text-lg">{tech.icon}</span>
+                  <tech.Icon />
                   <span className="text-sm font-medium group-hover:text-foreground transition-colors duration-300">
                     {tech.name}
                   </span>
