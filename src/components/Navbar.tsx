@@ -42,12 +42,6 @@ const Navbar = () => {
         </a>
 
         <div className="hidden md:flex items-center gap-6">
-          <a
-            href="mailto:kasisainath14@gmail.com"
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
-          >
-            ✉ kasisainath14@gmail.com
-          </a>
           {navItems.map((item) => (
             <a
               key={item.label}
