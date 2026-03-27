@@ -4,7 +4,7 @@ import {
   PythonIcon, FastAPIIcon, DockerIcon, PostgreSQLIcon,
   LangChainIcon, AgnoIcon, StrandsIcon, AWSIcon,
   OpenAIIcon, GitIcon, SupabaseIcon, KafkaIcon,
-  PipecatIcon, RAGASIcon, SarvamIcon,
+  PipecatIcon, RAGASIcon, SarvamIcon, PostmanIcon, MCPIcon,
 } from "@/components/TechIcons";
 
 const skillCategories = [
@@ -36,6 +36,8 @@ const techLogos = [
   { name: "RAGAS", Icon: RAGASIcon, color: "#009FE3" },
   { name: "Kafka", Icon: KafkaIcon, color: "#231F20" },
   { name: "Sarvam", Icon: SarvamIcon, color: "#E65100" },
+  { name: "Postman", Icon: PostmanIcon, color: "#FF6C37" },
+  { name: "MCP", Icon: MCPIcon, color: "#7C3AED" },
 ];
 
 const slideUp = {
