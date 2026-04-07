@@ -46,10 +46,10 @@ const DevIllustration = () => {
       <div
         className="absolute overflow-hidden pointer-events-none"
         style={{
-          top: "5%",
-          left: "22%",
-          width: "56%",
-          height: "52%",
+          top: "14%",
+          left: "35%",
+          width: "42%",
+          height: "38%",
           borderRadius: "4px",
         }}
       >
