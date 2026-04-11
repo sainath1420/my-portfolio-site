@@ -27,7 +27,7 @@ const EducationSection = () => {
           <div className="accent-line mt-4" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-3xl">
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -57,9 +57,27 @@ const EducationSection = () => {
               <Award size={24} className="text-primary" />
             </div>
             <h3 className="text-lg font-bold font-heading text-foreground">Extra Miler Award</h3>
-            <p className="text-sm text-primary font-medium">Smart IMS</p>
+            <p className="text-sm text-primary font-medium">Smart IMS • 2024</p>
             <p className="text-sm text-muted-foreground mt-2">
-              Recognized for exceptional dedication and outstanding contributions to projects.
+              Recognised for exceptional dedication and outstanding contributions to projects.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={slideUp}
+            custom={3}
+            className="bg-background border border-border rounded-xl p-6"
+          >
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <Award size={24} className="text-primary" />
+            </div>
+            <h3 className="text-lg font-bold font-heading text-foreground">Difference Maker Award</h3>
+            <p className="text-sm text-primary font-medium">Smart IMS • Dec 2025</p>
+            <p className="text-sm text-muted-foreground mt-2">
+              Recognised for outstanding impact and contributions at Smart IMS.
             </p>
           </motion.div>
         </div>

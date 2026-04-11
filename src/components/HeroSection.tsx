@@ -1,12 +1,6 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, ExternalLink } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
-
-const socials = [
-  { icon: Linkedin, href: "https://linkedin.com/in/kasisainath", label: "LinkedIn" },
-  { icon: Github, href: "https://github.com/kasisainath", label: "GitHub" },
-  { icon: ExternalLink, href: "#projects", label: "Portfolio" },
-];
 
 const HeroSection = () => {
   return (
@@ -29,27 +23,34 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="text-lg text-muted-foreground leading-relaxed max-w-lg"
           >
-            Software Engineer specializing in Python backend development and Generative AI. 
-            Building scalable APIs and AI-driven solutions with ~3 years of experience.
+            AI Engineer with 3.5 years of experience specializing in Generative AI, 
+            RAG pipelines, Agentic AI frameworks, and Python backend development.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="flex items-center gap-4 pt-2"
+            className="flex items-center gap-3 pt-2"
           >
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors duration-300"
-              >
-                <s.icon size={18} />
-              </a>
-            ))}
+            <a
+              href="https://linkedin.com/in/kasisainath"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium text-sm"
+            >
+              <Linkedin size={18} />
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/kasisainath"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border bg-card text-foreground hover:border-primary/30 transition-colors font-medium text-sm"
+            >
+              <Github size={18} />
+              GitHub
+            </a>
           </motion.div>
         </div>
 
@@ -63,7 +64,7 @@ const HeroSection = () => {
             <div className="absolute inset-0 bg-primary/10 rounded-full blur-3xl" />
             <img
               src={avatarImg}
-              alt="Sainath - Software Engineer"
+              alt="Sainath - AI Engineer"
               className="relative w-full h-full object-contain rounded-2xl"
             />
           </div>

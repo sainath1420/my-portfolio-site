@@ -214,3 +214,23 @@ export const MCPIcon = () => (
     </g>
   </svg>
 );
+
+export const AgentCoreIcon = () => (
+  <svg viewBox="0 0 100 100" className="w-5 h-5">
+    <defs>
+      <linearGradient id="agentcore1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#232F3E"/>
+        <stop offset="100%" stopColor="#FF9900"/>
+      </linearGradient>
+    </defs>
+    <rect width="100" height="100" rx="22" fill="url(#agentcore1)"/>
+    <g transform="translate(50,50)" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round">
+      <circle r="20"/>
+      <circle r="8" fill="white" stroke="none"/>
+      <line x1="0" y1="-20" x2="0" y2="-30" />
+      <line x1="0" y1="20" x2="0" y2="30" />
+      <line x1="-20" y1="0" x2="-30" y2="0" />
+      <line x1="20" y1="0" x2="30" y2="0" />
+    </g>
+  </svg>
+);

@@ -33,7 +33,7 @@ const ContactSection = () => {
           viewport={{ once: true, margin: "-50px" }}
           variants={slideUp}
           custom={1}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mb-8"
         >
           <a href="mailto:kasisainath14@gmail.com" className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-all duration-300 group">
             <Mail size={20} className="text-primary mb-3" />
@@ -52,20 +52,34 @@ const ContactSection = () => {
             <p className="text-sm font-medium text-foreground">Location</p>
             <p className="text-xs text-muted-foreground mt-1">Hyderabad, India</p>
           </div>
+        </motion.div>
 
-          <div className="bg-card border border-border rounded-xl p-5 flex flex-col">
-            <p className="text-sm font-medium text-foreground mb-3">Socials</p>
-            <div className="flex gap-3 mt-auto">
-              <a href="https://linkedin.com/in/kasisainath" target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors duration-300">
-                <Linkedin size={16} />
-              </a>
-              <a href="https://github.com/kasisainath" target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors duration-300">
-                <Github size={16} />
-              </a>
-            </div>
-          </div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={slideUp}
+          custom={2}
+          className="flex gap-3"
+        >
+          <a
+            href="https://linkedin.com/in/kasisainath"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium text-sm"
+          >
+            <Linkedin size={18} />
+            LinkedIn
+          </a>
+          <a
+            href="https://github.com/kasisainath"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border bg-card text-foreground hover:border-primary/30 transition-colors font-medium text-sm"
+          >
+            <Github size={18} />
+            GitHub
+          </a>
         </motion.div>
       </div>
     </section>

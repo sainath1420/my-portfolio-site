@@ -2,12 +2,14 @@ import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
 
 const highlights = [
-  "Designed and developed RESTful and async APIs using FastAPI for enterprise and AI-driven applications.",
-  "Implemented JWT authentication and Role-Based Access Control (RBAC) for secure multi-user access.",
-  "Created end-to-end flow for building Chat Agents, Agent Teams & Workflows using Agno agentic framework.",
-  "Implemented real-time conversational audio agents using WebSockets and OpenAI real-time API.",
-  "Built RAG-based document processing APIs powering 'Chat with Doc' and Notebook-style LLM features.",
-  "Utilized Celery and FastAPI Background Tasks for heavy background workflows.",
+  "Specialised as an AI Engineer building production RAG pipelines, agentic workflows, and LLM-powered backends using FastAPI and Python.",
+  "Built end-to-end Chat Agent platform using the Agno agentic framework, enabling users to configure LLMs, tools, guardrails, MCPs, and RAG-based knowledge integration.",
+  "Designed and deployed RAG-based document processing APIs: extraction, chunking, and summarisation to power 'Chat with Doc' and notebook-style LLM features.",
+  "Implemented real-time conversational voice agents using Pipecat with Deepgram & Cartesia (English) and Sarvam (Indian regional languages) for STT/TTS over WebSockets and WebRTC.",
+  "Integrated AWS Bedrock, AgentCore, and Strands to build cloud-native AI agent infrastructure for enterprise clients.",
+  "Integrated LLMWhispher OCR for converting scanned insurance documents into clean Markdown, combined with EasyOCR and Tesseract for hybrid extraction.",
+  "Implemented JWT authentication and Role-Based Access Control (RBAC) for secure multi-user AI applications.",
+  "Leveraged Celery and FastAPI Background Tasks for heavy, long-running AI/ML workflows and batch processing pipelines.",
 ];
 
 const slideUp = {
@@ -49,7 +51,7 @@ const ExperienceSection = () => {
               <Briefcase size={24} className="text-primary" />
             </div>
             <div>
-              <h3 className="text-xl font-bold font-heading text-foreground">Software Engineer</h3>
+              <h3 className="text-xl font-bold font-heading text-foreground">AI Engineer / Software Engineer I</h3>
               <p className="text-primary font-medium">Smart IMS, Hyderabad</p>
               <p className="text-sm text-muted-foreground">Dec 2022 – Present</p>
             </div>
