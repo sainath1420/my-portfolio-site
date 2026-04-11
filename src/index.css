@@ -108,4 +108,12 @@
   .accent-line {
     @apply w-12 h-1 bg-primary rounded-full;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
