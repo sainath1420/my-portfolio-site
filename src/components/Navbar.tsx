@@ -56,7 +56,9 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#experience"
+            href="/Sainath_AI_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 transition-opacity"
           >
             <FileText size={14} />
@@ -89,7 +91,9 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#experience"
+            href="/Sainath_AI_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}
             className="block px-6 py-2 text-sm text-primary font-medium"
           >

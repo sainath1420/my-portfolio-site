@@ -1,20 +1,34 @@
 import { motion } from "framer-motion";
-import { Bot, FlaskConical, Microscope, FileSearch, Youtube } from "lucide-react";
+import { Bot, FlaskConical, Microscope, FileSearch, Youtube, Shield, Headphones } from "lucide-react";
 
 const projects = [
+  {
+    icon: Shield,
+    title: "Coaction – AI Insurance Agent",
+    subtitle: "AWS-Native Agent Platform",
+    description: "Built AI agent on AWS for Coaction insurance carrier using Bedrock, AgentCore, and Strands. Multi-source RAG pipeline with SharePoint docs and web-scraped data for complex insurance queries.",
+    tags: ["AWS Bedrock", "AgentCore", "Strands", "RAG", "FastAPI"],
+  },
+  {
+    icon: Headphones,
+    title: "Audio Agent – Insurance",
+    subtitle: "Conversational Voice AI",
+    description: "Real-time conversational audio agent for insurance policy and claims handling with STT & TTS. Integrated Sarvam for Indian regional language voices over WebSockets and WebRTC.",
+    tags: ["Pipecat", "Sarvam", "Deepgram", "WebSockets", "FastAPI"],
+  },
   {
     icon: Bot,
     title: "Xymphony AI",
     subtitle: "Agent Development Platform",
-    description: "Scalable backend integrating multiple LLM providers via unified API. Modular agent architecture with dynamic RAG and evaluation using RAGAS.",
-    tags: ["FastAPI", "OpenAI", "Docker", "RAGAS", "CI/CD"],
+    description: "Scalable backend integrating multiple LLM providers via unified API. Modular agent architecture with Agno framework, dynamic RAG and evaluation using RAGAS.",
+    tags: ["FastAPI", "Agno", "RAG", "RAGAS", "Docker"],
   },
   {
     icon: FlaskConical,
     title: "Clinical Trial Management",
     subtitle: "CTMS",
     description: "Streamlined planning, tracking, and management of clinical trials with Keycloak auth and EDC integrations via microservices.",
-    tags: ["FastAPI", "Keycloak", "Microservices", "ETMF"],
+    tags: ["FastAPI", "Keycloak", "Microservices", "PostgreSQL"],
   },
   {
     icon: Microscope,
@@ -29,13 +43,6 @@ const projects = [
     subtitle: "RAG System",
     description: "Document retrieval system using LangChain and RAG with Ollama for deploying and managing language models.",
     tags: ["LangChain", "RAG", "Ollama", "Python"],
-  },
-  {
-    icon: Youtube,
-    title: "YouTube Video Analyzer",
-    subtitle: "Analytics Tool",
-    description: "Comprehensive tool to analyze YouTube videos by extracting metadata, comments, and engagement metrics for content optimization.",
-    tags: ["Python", "Data Scraping", "Analytics"],
   },
 ];
 

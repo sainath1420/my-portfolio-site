@@ -4,7 +4,7 @@ import {
   PythonIcon, FastAPIIcon, DockerIcon, PostgreSQLIcon,
   LangChainIcon, AgnoIcon, StrandsIcon, AWSIcon,
   OpenAIIcon, GitIcon, SupabaseIcon, KafkaIcon,
-  PipecatIcon, RAGASIcon, SarvamIcon, PostmanIcon, MCPIcon,
+  PipecatIcon, RAGASIcon, SarvamIcon, PostmanIcon, MCPIcon, AgentCoreIcon,
 } from "@/components/TechIcons";
 
 const skillCategories = [
@@ -38,6 +38,7 @@ const techLogos = [
   { name: "Sarvam", Icon: SarvamIcon, color: "#E65100" },
   { name: "Postman", Icon: PostmanIcon, color: "#FF6C37" },
   { name: "MCP", Icon: MCPIcon, color: "#7C3AED" },
+  { name: "AgentCore", Icon: AgentCoreIcon, color: "#FF9900" },
 ];
 
 const slideUp = {
@@ -100,7 +101,7 @@ const SkillsSection = () => {
           </div>
         </div>
 
-        {/* Tech logos - grey, color on hover */}
+        {/* Tech logos - horizontal scrolling */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -111,25 +112,22 @@ const SkillsSection = () => {
           <p className="text-sm italic text-muted-foreground mb-6">
             Technologies I use for building scalable backend & AI applications
           </p>
-          <div className="bg-card border border-border rounded-xl p-8">
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-              {techLogos.map((tech, i) => (
-                <motion.div
-                  key={tech.name}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={slideUp}
-                  custom={i * 0.05}
-                  className="group flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary text-muted-foreground 
-                    grayscale hover:grayscale-0 hover:bg-secondary/80 transition-all duration-300 cursor-default"
-                >
-                  <tech.Icon />
-                  <span className="text-sm font-medium group-hover:text-foreground transition-colors duration-300">
-                    {tech.name}
-                  </span>
-                </motion.div>
-              ))}
+          <div className="bg-card border border-border rounded-xl p-6 overflow-hidden">
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-3 min-w-max pb-1">
+                {techLogos.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="group flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary text-muted-foreground 
+                      grayscale hover:grayscale-0 hover:bg-secondary/80 transition-all duration-300 cursor-default flex-shrink-0"
+                  >
+                    <tech.Icon />
+                    <span className="text-sm font-medium group-hover:text-foreground transition-colors duration-300 whitespace-nowrap">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>
