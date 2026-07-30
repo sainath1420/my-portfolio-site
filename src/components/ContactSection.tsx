@@ -35,19 +35,19 @@ const ContactSection = () => {
           custom={1}
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
         >
-          <a href="mailto:kasisainath14@gmail.com" className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-all duration-300 group">
+          <a href="mailto:kasisainath14@gmail.com" className="glow-card p-5 hover:border-primary/30 transition-all duration-300 group">
             <Mail size={20} className="text-primary mb-3" />
             <p className="text-sm font-medium text-foreground">Email</p>
             <p className="text-xs text-muted-foreground mt-1 group-hover:text-primary transition-colors">kasisainath14@gmail.com</p>
           </a>
 
-          <a href="tel:+919133839569" className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-all duration-300 group">
+          <a href="tel:+919133839569" className="glow-card p-5 hover:border-primary/30 transition-all duration-300 group">
             <Phone size={20} className="text-primary mb-3" />
             <p className="text-sm font-medium text-foreground">Phone</p>
             <p className="text-xs text-muted-foreground mt-1 group-hover:text-primary transition-colors">+91 9133839569</p>
           </a>
 
-          <div className="bg-card border border-border rounded-xl p-5">
+          <div className="glow-card p-5">
             <MapPin size={20} className="text-primary mb-3" />
             <p className="text-sm font-medium text-foreground">Location</p>
             <p className="text-xs text-muted-foreground mt-1">Hyderabad, India</p>
@@ -57,7 +57,7 @@ const ContactSection = () => {
             href="https://linkedin.com/in/kasisainath"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-all duration-300 group flex flex-col"
+            className="glow-card p-5 hover:border-primary/30 transition-all duration-300 group flex flex-col"
           >
             <Linkedin size={20} className="text-primary mb-3" />
             <p className="text-sm font-medium text-foreground">LinkedIn</p>
@@ -68,7 +68,7 @@ const ContactSection = () => {
             href="https://github.com/kasisainath"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-all duration-300 group flex flex-col"
+            className="glow-card p-5 hover:border-primary/30 transition-all duration-300 group flex flex-col"
           >
             <Github size={20} className="text-primary mb-3" />
             <p className="text-sm font-medium text-foreground">GitHub</p>
