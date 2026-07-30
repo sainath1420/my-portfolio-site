@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { Calendar, MapPin } from "lucide-react";
 import FlipCard from "@/components/FlipCard";
-import bhpLogo from "@/assets/bhp-logo.png.asset.json";
-import smartImsLogo from "@/assets/smart-ims-logo.png.asset.json";
+import bhpLogo from "@/assets/bhp-logo.png";
+import smartImsLogo from "@/assets/smart-ims-logo.png";
 
 const roles = [
   {
     company: "BHP",
-    logo: bhpLogo.url,
+    logo: bhpLogo,
     role: "AI Engineer",
     period: "Aug 2026 — Present",
     location: "Australia",
@@ -23,7 +23,7 @@ const roles = [
   },
   {
     company: "Smart IMS",
-    logo: smartImsLogo.url,
+    logo: smartImsLogo,
     role: "AI Engineer / Software Engineer I",
     period: "Dec 2022 — Aug 2026",
     location: "Hyderabad, India",
