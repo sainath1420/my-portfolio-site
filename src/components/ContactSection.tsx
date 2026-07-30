@@ -50,29 +50,29 @@ const ContactSection = () => {
           <div className="glow-card p-5">
             <MapPin size={20} className="text-primary mb-3" />
             <p className="text-sm font-medium text-foreground">Location</p>
-            <p className="text-xs text-muted-foreground mt-1">Hyderabad, India</p>
+            <p className="text-xs text-muted-foreground mt-1">India</p>
           </div>
 
           <a
-            href="https://linkedin.com/in/kasisainath"
+            href="https://www.linkedin.com/in/vinnakota-sainath"
             target="_blank"
             rel="noopener noreferrer"
             className="glow-card p-5 hover:border-primary/30 transition-all duration-300 group flex flex-col"
           >
             <Linkedin size={20} className="text-primary mb-3" />
             <p className="text-sm font-medium text-foreground">LinkedIn</p>
-            <p className="text-xs text-muted-foreground mt-1 group-hover:text-primary transition-colors">kasisainath</p>
+            <p className="text-xs text-muted-foreground mt-1 group-hover:text-primary transition-colors">vinnakota-sainath</p>
           </a>
 
           <a
-            href="https://github.com/kasisainath"
+            href="https://github.com/sainath1420"
             target="_blank"
             rel="noopener noreferrer"
             className="glow-card p-5 hover:border-primary/30 transition-all duration-300 group flex flex-col"
           >
             <Github size={20} className="text-primary mb-3" />
             <p className="text-sm font-medium text-foreground">GitHub</p>
-            <p className="text-xs text-muted-foreground mt-1 group-hover:text-primary transition-colors">kasisainath</p>
+            <p className="text-xs text-muted-foreground mt-1 group-hover:text-primary transition-colors">sainath1420</p>
           </a>
         </motion.div>
       </div>

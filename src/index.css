@@ -50,25 +50,25 @@
   }
 
   .dark {
-    --background: 220 20% 8%;
+    --background: 220 20% 6%;
     --foreground: 30 20% 95%;
-    --card: 220 18% 12%;
+    --card: 220 18% 10%;
     --card-foreground: 30 20% 95%;
-    --popover: 220 18% 12%;
+    --popover: 220 18% 10%;
     --popover-foreground: 30 20% 95%;
-    --primary: 4 72% 56%;
+    --primary: 20 90% 52%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 15% 16%;
+    --secondary: 220 15% 14%;
     --secondary-foreground: 30 20% 95%;
-    --muted: 220 12% 18%;
-    --muted-foreground: 220 10% 60%;
-    --accent: 4 72% 56%;
+    --muted: 220 12% 16%;
+    --muted-foreground: 220 10% 62%;
+    --accent: 20 90% 52%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
-    --ring: 4 72% 56%;
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 20 90% 52%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -127,10 +127,21 @@
     backdrop-filter: blur(14px);
     box-shadow:
       0 1px 0 0 hsl(0 0% 100% / 0.35) inset,
+      0 8px 20px -12px hsl(220 40% 10% / 0.15);
+    transition: box-shadow 0.3s ease;
+  }
+  .glow-card:hover {
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.35) inset,
       0 18px 45px -25px hsl(var(--primary) / 0.45),
       0 2px 20px -12px hsl(220 40% 10% / 0.35);
   }
   .dark .glow-card {
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.06) inset,
+      0 8px 20px -12px hsl(0 0% 0% / 0.4);
+  }
+  .dark .glow-card:hover {
     box-shadow:
       0 1px 0 0 hsl(0 0% 100% / 0.06) inset,
       0 18px 55px -28px hsl(var(--primary) / 0.6),
@@ -152,7 +163,7 @@
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    opacity: 0.55;
+    opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
   }
@@ -160,30 +171,69 @@
 }
 
 @layer utilities {
-  /* Ambient, semi-transparent page backdrop instead of flat black/white */
+  /* Ambient, warm layered backdrop instead of flat white/black */
   .ambient-bg::before {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: -2;
     pointer-events: none;
     background:
-      radial-gradient(60rem 40rem at 12% -10%, hsl(var(--primary) / 0.16), transparent 60%),
-      radial-gradient(50rem 35rem at 95% 8%, hsl(28 90% 55% / 0.12), transparent 60%),
-      radial-gradient(55rem 45rem at 50% 105%, hsl(var(--primary) / 0.12), transparent 62%);
+      radial-gradient(50rem 38rem at 8% -8%, hsl(26 70% 50% / 0.20), transparent 60%),
+      radial-gradient(46rem 34rem at 98% 4%, hsl(34 80% 55% / 0.16), transparent 60%),
+      radial-gradient(55rem 45rem at 50% 108%, hsl(22 60% 42% / 0.16), transparent 62%),
+      radial-gradient(40rem 40rem at 80% 70%, hsl(18 55% 40% / 0.10), transparent 65%);
   }
   .ambient-bg::after {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: -2;
     pointer-events: none;
     opacity: 0.5;
     background-image:
-      linear-gradient(hsl(var(--foreground) / 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--foreground) / 0.045) 1px, transparent 1px);
+      linear-gradient(hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
     background-size: 56px 56px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, #000 40%, transparent 100%);
+  }
+
+  /* Slowly drifting soft orbs layered under content for a non-plain, premium feel */
+  .ambient-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .ambient-orbs span {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+    opacity: 0.5;
+    will-change: transform;
+  }
+  .ambient-orbs span:nth-child(1) {
+    width: 26rem; height: 26rem; top: -6rem; left: -6rem;
+    background: radial-gradient(circle, hsl(26 70% 52% / 0.5), transparent 70%);
+    animation: drift1 22s ease-in-out infinite;
+  }
+  .ambient-orbs span:nth-child(2) {
+    width: 22rem; height: 22rem; bottom: 4rem; right: -4rem;
+    background: radial-gradient(circle, hsl(34 80% 56% / 0.4), transparent 70%);
+    animation: drift2 26s ease-in-out infinite;
+  }
+  .ambient-orbs span:nth-child(3) {
+    width: 18rem; height: 18rem; top: 40%; left: 55%;
+    background: radial-gradient(circle, hsl(18 55% 42% / 0.35), transparent 70%);
+    animation: drift3 30s ease-in-out infinite;
+  }
+  @keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(4rem, 3rem); } }
+  @keyframes drift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-5rem, -2rem); } }
+  @keyframes drift3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-3rem, 4rem); } }
+  @media (prefers-reduced-motion: reduce) {
+    .ambient-orbs span { animation: none; }
   }
 
   /* 3D flip cards */

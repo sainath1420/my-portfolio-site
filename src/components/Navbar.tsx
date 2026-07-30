@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Menu, X, FileText } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
   { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
@@ -55,7 +55,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="/Sainath_AI_Resume.pdf"
+            href="/Sainath_AI_Engineer_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 transition-opacity"
@@ -63,14 +63,18 @@ const Navbar = () => {
             <FileText size={14} />
             Resume
           </a>
+          <ThemeToggle />
         </div>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-foreground"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-foreground"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {isOpen && (
@@ -90,7 +94,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="/Sainath_AI_Resume.pdf"
+            href="/Sainath_AI_Engineer_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}

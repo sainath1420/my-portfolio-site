@@ -10,8 +10,10 @@ const roles = [
     logo: bhpLogo,
     role: "AI Engineer",
     period: "Aug 2026 — Present",
-    location: "Australia",
-    badge: "New Role",
+    location: "Gurugram, India",
+    badge: "",
+    flipColor: "bg-orange-500/20 dark:bg-orange-500/25",
+    accentColor: "bg-orange-500",
     summary:
       "Joining one of the world's leading resources companies to build and scale enterprise Generative AI and agentic systems.",
     highlights: [
@@ -28,6 +30,8 @@ const roles = [
     period: "Dec 2022 — Aug 2026",
     location: "Hyderabad, India",
     badge: "3.7 yrs",
+    flipColor: "bg-blue-500/20 dark:bg-blue-500/25",
+    accentColor: "bg-blue-500",
     summary:
       "Built production RAG pipelines, agentic platforms, and real-time voice agents for enterprise insurance and healthcare clients.",
     highlights: [
@@ -65,9 +69,6 @@ const ExperienceSection = () => {
           <p className="section-subtitle">Career Journey</p>
           <h2 className="section-heading mt-2">Work Experience</h2>
           <div className="accent-line mt-4" />
-          <p className="text-sm text-muted-foreground mt-4">
-            Hover (or tap) each card to flip and see what I built.
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -93,9 +94,11 @@ const ExperienceSection = () => {
                           loading="lazy"
                         />
                       </div>
-                      <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary whitespace-nowrap">
-                        {r.badge}
-                      </span>
+                      {r.badge && (
+                        <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary whitespace-nowrap">
+                          {r.badge}
+                        </span>
+                      )}
                     </div>
 
                     <h3 className="text-xl font-bold font-heading text-foreground mt-6">{r.role}</h3>
@@ -111,18 +114,16 @@ const ExperienceSection = () => {
                     </div>
 
                     <p className="text-sm text-muted-foreground leading-relaxed mt-4">{r.summary}</p>
-
-                    <p className="text-xs text-primary mt-auto pt-4">Hover / tap to see highlights →</p>
                   </div>
                 }
                 back={
-                  <div className="h-full flex flex-col p-6 bg-primary/5">
+                  <div className={`h-full flex flex-col p-6 ${r.flipColor}`}>
                     <h3 className="text-lg font-bold font-heading text-foreground">{r.company}</h3>
                     <p className="text-sm text-primary font-medium mb-3">{r.role}</p>
                     <ul className="space-y-2 overflow-y-auto pr-1 scrollbar-hide">
                       {r.highlights.map((h) => (
                         <li key={h} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                          <span className={`w-1.5 h-1.5 rounded-full ${r.accentColor} mt-2 flex-shrink-0`} />
                           {h}
                         </li>
                       ))}

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin } from "lucide-react";
-import avatarImg from "@/assets/avatar.png";
+import { Github, Linkedin, Mail, Phone } from "lucide-react";
+import avatarImg from "@/assets/sainath-photo.jpg";
 
 const HeroSection = () => {
   return (
@@ -31,26 +31,43 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="flex items-center gap-3 pt-2"
+            className="flex flex-col gap-3 pt-2"
           >
-            <a
-              href="https://linkedin.com/in/kasisainath"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium text-sm"
-            >
-              <Linkedin size={18} />
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/kasisainath"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border bg-card text-foreground hover:border-primary/30 transition-colors font-medium text-sm"
-            >
-              <Github size={18} />
-              GitHub
-            </a>
+            <p className="text-sm text-muted-foreground">Let's connect</p>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/in/vinnakota-sainath"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="LinkedIn"
+                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground hover:text-[#0A66C2] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5 transition-all duration-200"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="https://github.com/sainath1420"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub"
+                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-200"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href="mailto:kasisainath14@gmail.com"
+                title="Email"
+                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground hover:text-[#EA4335] hover:border-[#EA4335]/40 hover:bg-[#EA4335]/5 transition-all duration-200"
+              >
+                <Mail size={18} />
+              </a>
+              <a
+                href="tel:+919133839569"
+                title="Call"
+                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground hover:text-emerald-500 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all duration-200"
+              >
+                <Phone size={18} />
+              </a>
+            </div>
           </motion.div>
         </div>
 
@@ -65,7 +82,7 @@ const HeroSection = () => {
             <img
               src={avatarImg}
               alt="Sainath - AI Engineer"
-              className="relative w-full h-full object-contain rounded-2xl"
+              className="relative w-full h-full object-cover rounded-2xl border border-border/60 shadow-xl"
             />
           </div>
         </motion.div>
