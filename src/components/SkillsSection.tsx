@@ -67,7 +67,7 @@ const SkillsSection = () => {
           <div className="accent-line mt-4" />
         </motion.div>
 
-        <div className="bg-card border border-border rounded-xl p-8 md:p-12 mb-12">
+        <div className="glow-card p-8 md:p-12 mb-12">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-8">
               {skillCategories.map((cat, i) => (
