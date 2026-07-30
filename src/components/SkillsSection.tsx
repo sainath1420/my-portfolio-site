@@ -112,22 +112,20 @@ const SkillsSection = () => {
           <p className="text-sm italic text-muted-foreground mb-6">
             Technologies I use for building scalable backend & AI applications
           </p>
-          <div className="bg-card border border-border rounded-xl p-6 overflow-hidden">
-            <div className="overflow-x-auto scrollbar-hide">
-              <div className="flex gap-3 min-w-max pb-1">
-                {techLogos.map((tech) => (
-                  <div
-                    key={tech.name}
-                    className="group flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary text-muted-foreground 
-                      grayscale hover:grayscale-0 hover:bg-secondary/80 transition-all duration-300 cursor-default flex-shrink-0"
-                  >
-                    <tech.Icon />
-                    <span className="text-sm font-medium group-hover:text-foreground transition-colors duration-300 whitespace-nowrap">
-                      {tech.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
+          <div className="glow-card p-6 overflow-hidden marquee marquee-mask">
+            <div className="marquee-track gap-3">
+              {[...techLogos, ...techLogos].map((tech, idx) => (
+                <div
+                  key={`${tech.name}-${idx}`}
+                  className="group flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary/70 border border-border/60
+                    hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300 cursor-default flex-shrink-0"
+                >
+                  <tech.Icon />
+                  <span className="text-sm font-medium text-foreground whitespace-nowrap">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>

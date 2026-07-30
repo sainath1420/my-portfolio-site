@@ -23,8 +23,8 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="text-lg text-muted-foreground leading-relaxed max-w-lg"
           >
-            AI Engineer with 3.5 years of experience specializing in Generative AI, 
-            RAG pipelines, Agentic AI frameworks, and Python backend development.
+            AI Engineer with 4 years of experience building Generative AI systems —
+            RAG pipelines, AI agents, real-time voice agents, and Python backends.
           </motion.p>
 
           <motion.div
