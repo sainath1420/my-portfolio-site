@@ -1,11 +1,13 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Bot, FlaskConical, Microscope, FileSearch, Shield, Headphones, LucideIcon } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
+const projects: { icon: LucideIcon; title: string; subtitle: string; description: string; tags: string[]; color: string; accent: string }[] = [
   {
+    icon: Shield,
     title: "Project Vega",
     subtitle: "AWS-Native AI Insurance Agent",
     description: "Enterprise AI agent built on AWS (Bedrock, AgentCore, Strands) for an insurance carrier. Multi-source RAG pipeline with RBAC, JWT and LLM guardrails.",
@@ -14,6 +16,7 @@ const projects = [
     accent: "text-orange-400",
   },
   {
+    icon: Bot,
     title: "Xymphony AI",
     subtitle: "Agent Development Platform",
     description: "Scalable backend integrating multiple LLM providers via a unified API. Modular agent architecture on Agno with dynamic RAG and RAGAS evaluation.",
@@ -22,6 +25,7 @@ const projects = [
     accent: "text-blue-400",
   },
   {
+    icon: FlaskConical,
     title: "CTMS",
     subtitle: "Clinical Trial Management",
     description: "Microservices system for planning, tracking, and managing clinical trials with Keycloak auth and EDC integrations.",
@@ -30,6 +34,7 @@ const projects = [
     accent: "text-emerald-400",
   },
   {
+    icon: Microscope,
     title: "SMS",
     subtitle: "Sample Management System",
     description: "System to efficiently store, track, and manage blood and tissue samples with secure document storage and scalable architecture.",
@@ -38,6 +43,7 @@ const projects = [
     accent: "text-purple-400",
   },
   {
+    icon: Headphones,
     title: "Voice AI Agent",
     subtitle: "Real-time Conversational Voice",
     description: "Real-time voice agent with Pipecat, Deepgram/Cartesia for English and Sarvam AI for Indian languages over WebSockets and WebRTC.",
@@ -46,6 +52,7 @@ const projects = [
     accent: "text-rose-400",
   },
   {
+    icon: FileSearch,
     title: "Document Q/A",
     subtitle: "RAG System",
     description: "AI-powered document retrieval and Q&A system using LangChain and RAG with Ollama for locally managing open-source LLMs.",
@@ -98,9 +105,14 @@ const ProjectsSection = () => {
               className={`flex-shrink-0 w-[22rem] md:w-[28rem] rounded-2xl border border-border bg-gradient-to-br ${project.color} p-8 flex flex-col justify-between min-h-[24rem]`}
             >
               <div>
-                <span className={`text-xs font-semibold uppercase tracking-widest ${project.accent}`}>
-                  {project.subtitle}
-                </span>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`grid h-9 w-9 place-items-center rounded-lg bg-white/5 border border-white/10`}>
+                    <project.icon size={18} className={project.accent} />
+                  </div>
+                  <span className={`text-xs font-semibold uppercase tracking-widest ${project.accent}`}>
+                    {project.subtitle}
+                  </span>
+                </div>
                 <h3 className="text-2xl font-bold text-foreground font-heading mt-2">{project.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mt-4">{project.description}</p>
               </div>

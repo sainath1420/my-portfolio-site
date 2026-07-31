@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import FlipCard from "@/components/FlipCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,97 +9,98 @@ const milestones = [
   {
     year: "'19",
     title: "Started College",
-    description: "Began B.Tech in Computer Science at DMS SVH College of Engineering, Machilipatnam.",
+    description: "B.Tech in Computer Science at DMS SVH College of Engineering, Machilipatnam.",
     image: "/assets/college-logo.png",
-    side: "right" as const,
+    color: "bg-amber-500/15",
   },
   {
     year: "'20",
     title: "YouTube Era Begins",
-    description: "Launched \"Sainath Roy Gaming\" — streaming, content creation, and building a community from scratch.",
+    description: "Launched \"Sainath Roy Gaming\" — streaming and content creation, building a community from scratch.",
     image: "/assets/gaming-logo.png",
-    side: "left" as const,
+    color: "bg-red-500/15",
   },
   {
     year: "'21",
     title: "50K Subscribers",
-    description: "Hit the 50,000 subscriber milestone on YouTube. Learned consistency, audience building, and content strategy.",
+    description: "Hit the 50,000 subscriber milestone. Learned consistency, audience building, and content strategy.",
     image: "/assets/youtube-50k.png",
-    side: "right" as const,
+    color: "bg-rose-500/15",
   },
   {
     year: "'22",
     title: "Career Begins",
-    description: "Graduated B.Tech (CGPA 7.58), quit YouTube, and joined Smart IMS as a Python developer intern.",
+    description: "Graduated B.Tech, quit YouTube, and joined Smart IMS as a Python developer intern.",
     image: "/assets/smartims.png",
-    side: "left" as const,
+    color: "bg-blue-500/15",
   },
   {
     year: "'23",
     title: "Full-time Engineer",
-    description: "Converted to full-time Associate Engineer 1. Built microservices, REST APIs, and backend systems with FastAPI.",
-    side: "right" as const,
+    description: "Promoted to Associate Engineer 1. Built microservices, REST APIs, and backend systems with FastAPI.",
+    color: "bg-emerald-500/15",
   },
   {
     year: "'24",
     title: "Extra Miler Award",
     description: "Recognised for exceptional dedication and outstanding contributions to enterprise projects.",
     image: "/assets/award-extra-miler.png",
-    side: "left" as const,
+    color: "bg-purple-500/15",
   },
   {
     year: "'25",
     title: "The AI Pivot",
-    description: "Dove deep into Generative AI — RAG, agents, voice AI. Awarded Difference Maker. Promoted to Software Engineer 1.",
+    description: "Dove deep into Generative AI — RAG, agents, voice AI. Awarded Difference Maker. Promoted to SE1.",
     image: "/assets/award-difference-maker.png",
-    side: "right" as const,
+    color: "bg-orange-500/15",
   },
   {
     year: "'26",
     title: "BHP — AI Engineer",
     description: "Joined BHP, one of the world's largest resources companies, as an AI Engineer in Gurugram, India.",
     image: "/assets/bhp.png",
-    side: "left" as const,
+    color: "bg-orange-600/15",
   },
 ];
 
 const JourneySection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const lineRef = useRef<SVGLineElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     const cards = cardsRef.current.filter(Boolean);
 
-    cards.forEach((card) => {
-      const isLeft = card.dataset.side === "left";
+    cards.forEach((card, i) => {
+      const fromLeft = i % 2 === 0;
       gsap.fromTo(
         card,
-        { opacity: 0, x: isLeft ? -80 : 80 },
+        { opacity: 0, x: fromLeft ? -60 : 60, y: 30 },
         {
           opacity: 1,
           x: 0,
-          duration: 0.8,
+          y: 0,
+          duration: 0.7,
           ease: "power2.out",
           scrollTrigger: {
             trigger: card,
-            start: "top 80%",
+            start: "top 82%",
             toggleActions: "play none none reverse",
           },
         }
       );
     });
 
-    if (lineRef.current) {
-      const length = lineRef.current.getTotalLength();
-      gsap.set(lineRef.current, { strokeDasharray: length, strokeDashoffset: length });
-      gsap.to(lineRef.current, {
+    if (pathRef.current) {
+      const length = pathRef.current.getTotalLength();
+      gsap.set(pathRef.current, { strokeDasharray: length, strokeDashoffset: length });
+      gsap.to(pathRef.current, {
         strokeDashoffset: 0,
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 60%",
-          end: "bottom 80%",
+          start: "top 50%",
+          end: "bottom 70%",
           scrub: 1,
         },
       });
@@ -115,68 +117,79 @@ const JourneySection = () => {
           <h2 className="section-heading mt-3">About Me (&)<br/>My Journey</h2>
         </div>
 
-        {/* Timeline */}
         <div className="relative">
-          {/* Central vertical line (SVG) */}
+          {/* Curved SVG connecting path */}
           <svg
-            className="absolute left-1/2 top-0 -translate-x-1/2 h-full w-1 hidden md:block"
+            className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
             preserveAspectRatio="none"
+            viewBox="0 0 800 2400"
+            fill="none"
           >
-            <line
-              ref={lineRef}
-              x1="50%" y1="0" x2="50%" y2="100%"
+            <path
+              ref={pathRef}
+              d="M 650 50 C 700 150, 150 200, 150 300 C 150 400, 700 450, 650 550 C 600 650, 150 700, 150 800 C 150 900, 700 950, 650 1050 C 600 1150, 150 1200, 150 1300 C 150 1400, 700 1450, 650 1550 C 600 1650, 150 1700, 150 1800 C 150 1900, 700 1950, 650 2050"
               stroke="hsl(var(--primary))"
               strokeWidth="2"
-              strokeDasharray="6 6"
+              strokeLinecap="round"
+              opacity="0.6"
             />
+            {/* Dots at each milestone */}
+            {[50, 300, 550, 800, 1050, 1300, 1550, 1800].map((y, i) => (
+              <circle
+                key={i}
+                cx={i % 2 === 0 ? 650 : 150}
+                cy={y}
+                r="6"
+                fill="hsl(var(--primary))"
+                opacity="0.8"
+              />
+            ))}
           </svg>
 
-          {/* Mobile line */}
-          <div className="md:hidden absolute left-6 top-0 bottom-0 w-0.5 bg-border" />
-
-          <div className="space-y-16 md:space-y-24">
-            {milestones.map((m, i) => (
-              <div
-                key={m.year + m.title}
-                ref={(el) => { if (el) cardsRef.current[i] = el; }}
-                data-side={m.side}
-                className={`relative flex items-start gap-6 md:gap-0 ${
-                  m.side === "left"
-                    ? "md:flex-row-reverse md:text-right"
-                    : "md:flex-row md:text-left"
-                }`}
-              >
-                {/* Dot on timeline */}
-                <div className="hidden md:block absolute left-1/2 top-6 -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background z-10" />
-
-                {/* Mobile dot */}
-                <div className="md:hidden absolute left-6 top-6 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-3 border-background z-10" />
-
-                {/* Card */}
-                <div className={`ml-10 md:ml-0 md:w-[calc(50%-2.5rem)] ${m.side === "left" ? "md:pr-0 md:pl-0" : ""}`}>
-                  <div className="glow-card p-6">
-                    <span className="text-4xl md:text-5xl font-black text-primary/80 font-heading leading-none">
-                      {m.year}
-                    </span>
-                    <h3 className="text-lg font-bold text-foreground mt-3 font-heading">{m.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mt-2">{m.description}</p>
-                    {m.image && (
-                      <div className="mt-4 flex items-center gap-3">
-                        <img
-                          src={m.image}
-                          alt={m.title}
-                          className="h-10 w-10 rounded-lg object-contain bg-white/5 p-1"
-                          loading="lazy"
-                        />
-                      </div>
-                    )}
+          {/* Cards */}
+          <div className="space-y-12 md:space-y-20 relative z-10">
+            {milestones.map((m, i) => {
+              const isLeft = i % 2 === 0;
+              return (
+                <div
+                  key={m.year + m.title}
+                  ref={(el) => { if (el) cardsRef.current[i] = el; }}
+                  className={`flex ${isLeft ? "md:justify-start" : "md:justify-end"}`}
+                >
+                  <div className="w-full md:w-[55%]">
+                    <FlipCard
+                      heightClass="min-h-[14rem]"
+                      front={
+                        <div className={`h-full flex flex-col justify-center p-7 ${m.color}`}>
+                          <span className="text-4xl md:text-5xl font-black text-primary/80 font-heading leading-none">
+                            {m.year}
+                          </span>
+                          <h3 className="text-xl font-bold text-foreground mt-3 font-heading">{m.title}</h3>
+                          <p className="text-sm text-muted-foreground leading-relaxed mt-2">{m.description}</p>
+                        </div>
+                      }
+                      back={
+                        <div className={`h-full flex items-center justify-center p-4 ${m.color}`}>
+                          {m.image ? (
+                            <img
+                              src={m.image}
+                              alt={m.title}
+                              className="max-h-40 max-w-full object-contain rounded-lg"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="text-center">
+                              <span className="text-6xl font-black text-primary/40">{m.year}</span>
+                              <p className="text-sm text-muted-foreground mt-2">{m.title}</p>
+                            </div>
+                          )}
+                        </div>
+                      }
+                    />
                   </div>
                 </div>
-
-                {/* Spacer for the other side */}
-                <div className="hidden md:block md:w-[calc(50%-2.5rem)]" />
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

@@ -16,13 +16,15 @@ const Index = () => {
       {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
       <div className={`min-h-screen bg-background ${loaded ? "" : "overflow-hidden h-screen"}`}>
         <SidebarNav />
-        <main className="lg:ml-48">
+        <main>
           <HeroSection />
-          <JourneySection />
-          <ProjectsSection />
-          <SkillsSection />
-          <CertsAwardsSection />
-          <FooterContact />
+          <div className="lg:ml-48">
+            <JourneySection />
+            <ProjectsSection />
+            <SkillsSection />
+            <CertsAwardsSection />
+            <FooterContact />
+          </div>
         </main>
       </div>
     </>

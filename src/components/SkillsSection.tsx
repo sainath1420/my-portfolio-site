@@ -88,21 +88,23 @@ const SkillsSection = () => {
             </p>
           </div>
 
-          {/* Tech logo grid */}
-          <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4 mt-12 pt-8 border-t border-border">
-            {techLogos.map((tech) => (
-              <div
-                key={tech.name}
-                className="group flex flex-col items-center gap-2 py-3"
-              >
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-white/5 border border-border group-hover:border-primary/40 transition-colors">
-                  <img src={tech.src} alt={tech.name} className="h-7 w-7 object-contain" loading="lazy" />
-                </div>
-                <span className="text-[10px] text-muted-foreground group-hover:text-foreground transition-colors text-center">
-                  {tech.name}
-                </span>
+          {/* Tech logo marquee */}
+          <div className="mt-12 pt-8 border-t border-border overflow-hidden marquee-mask">
+            <div className="marquee">
+              <div className="marquee-track">
+                {[...techLogos, ...techLogos].map((tech, i) => (
+                  <div
+                    key={`${tech.name}-${i}`}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-secondary/50 border border-border flex-shrink-0"
+                  >
+                    <span className="grid h-8 w-8 place-items-center rounded-md bg-white/5">
+                      <img src={tech.src} alt={tech.name} className="h-5 w-5 object-contain" loading="lazy" />
+                    </span>
+                    <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">{tech.name}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>

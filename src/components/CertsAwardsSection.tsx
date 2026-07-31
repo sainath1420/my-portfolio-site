@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Maximize2, X } from "lucide-react";
+import { Maximize2, X, BadgeCheck, Award } from "lucide-react";
+import FlipCard from "@/components/FlipCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,17 +52,28 @@ const CertsAwardsSection = () => {
   useEffect(() => {
     const cards = cardsRef.current.filter(Boolean);
     cards.forEach((card, i) => {
-      gsap.fromTo(card, { y: 60, opacity: 0 }, {
-        y: 0, opacity: 1, duration: 0.6, delay: i * 0.08, ease: "power2.out",
+      gsap.fromTo(card, { y: 50, opacity: 0 }, {
+        y: 0, opacity: 1, duration: 0.6, delay: i * 0.06, ease: "power2.out",
         scrollTrigger: { trigger: card, start: "top 85%" },
       });
     });
     return () => { ScrollTrigger.getAll().forEach(t => t.kill()); };
   }, []);
 
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setLightbox(null);
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [lightbox]);
+
   return (
     <section id="certs" ref={sectionRef} className="py-32">
-      <div className="container max-w-5xl mx-auto px-4 lg:pl-56">
+      <div className="container max-w-5xl mx-auto px-4">
         <p className="section-subtitle">Recognition</p>
         <h2 className="section-heading mt-3">Awards & Certifications</h2>
 
@@ -72,24 +84,34 @@ const CertsAwardsSection = () => {
             <div
               key={a.title}
               ref={(el) => { if (el) cardsRef.current[i] = el; }}
-              className="glow-card group cursor-pointer overflow-hidden"
-              onClick={() => a.image && setLightbox({ image: a.image, title: a.title })}
             >
-              <div className="p-6">
-                <h4 className="text-base font-bold text-foreground">{a.title}</h4>
-                <p className="text-sm text-primary mt-1">{a.org}</p>
-                <p className="text-sm text-muted-foreground mt-2">{a.text}</p>
-              </div>
-              {a.image && (
-                <div className="relative h-40 bg-muted/30 border-t border-border overflow-hidden">
-                  <img src={a.image} alt={a.title} className="h-full w-full object-contain p-3" loading="lazy" />
-                  <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
-                    <span className="flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Maximize2 size={14} /> View
+              <FlipCard
+                heightClass="min-h-[15rem]"
+                front={
+                  <div className="h-full flex flex-col justify-center p-6">
+                    <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                      <Award size={22} className="text-primary" />
+                    </div>
+                    <h4 className="text-base font-bold text-foreground">{a.title}</h4>
+                    <p className="text-sm text-primary mt-1">{a.org}</p>
+                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{a.text}</p>
+                  </div>
+                }
+                back={
+                  <button
+                    type="button"
+                    onClick={() => a.image && setLightbox({ image: a.image, title: a.title })}
+                    className="group/back relative h-full w-full overflow-hidden bg-muted/30 p-3"
+                  >
+                    <img src={a.image} alt={a.title} className="h-full w-full object-contain rounded-lg" loading="lazy" />
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover/back:bg-black/40 transition-colors">
+                      <span className="flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground opacity-0 group-hover/back:opacity-100 transition-opacity">
+                        <Maximize2 size={14} /> View Certificate
+                      </span>
                     </span>
-                  </span>
-                </div>
-              )}
+                  </button>
+                }
+              />
             </div>
           ))}
         </div>
@@ -101,24 +123,34 @@ const CertsAwardsSection = () => {
             <div
               key={c.title}
               ref={(el) => { if (el) cardsRef.current[awards.length + i] = el; }}
-              className="glow-card group cursor-pointer overflow-hidden"
-              onClick={() => c.image && setLightbox({ image: c.image, title: c.title })}
             >
-              <div className="p-5">
-                <h4 className="text-sm font-bold text-foreground">{c.title}</h4>
-                <p className="text-xs text-primary mt-1">{c.issuer}</p>
-                <p className="text-xs text-muted-foreground mt-2">{c.detail}</p>
-              </div>
-              {c.image && (
-                <div className="relative h-36 bg-muted/30 border-t border-border overflow-hidden">
-                  <img src={c.image} alt={c.title} className="h-full w-full object-contain p-2" loading="lazy" />
-                  <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
-                    <span className="flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Maximize2 size={14} /> View
+              <FlipCard
+                heightClass="h-64"
+                front={
+                  <div className="h-full flex flex-col justify-center p-5">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                      <BadgeCheck size={18} className="text-primary" />
+                    </div>
+                    <h4 className="text-sm font-bold text-foreground">{c.title}</h4>
+                    <p className="text-xs text-primary mt-1">{c.issuer}</p>
+                    <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{c.detail}</p>
+                  </div>
+                }
+                back={
+                  <button
+                    type="button"
+                    onClick={() => c.image && setLightbox({ image: c.image, title: c.title })}
+                    className="group/back relative h-full w-full overflow-hidden bg-muted/30 p-2"
+                  >
+                    <img src={c.image} alt={c.title} className="h-full w-full object-contain rounded-lg" loading="lazy" />
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover/back:bg-black/40 transition-colors">
+                      <span className="flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground opacity-0 group-hover/back:opacity-100 transition-opacity">
+                        <Maximize2 size={14} /> View
+                      </span>
                     </span>
-                  </span>
-                </div>
-              )}
+                  </button>
+                }
+              />
             </div>
           ))}
         </div>
@@ -127,7 +159,7 @@ const CertsAwardsSection = () => {
       {/* Lightbox */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-sm p-4"
           onClick={() => setLightbox(null)}
         >
           <button
