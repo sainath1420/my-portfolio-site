@@ -46,7 +46,7 @@ const FooterContact = () => {
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Phone size={16} className="text-primary" />
-                +91 9133839569
+                Call
               </a>
             </div>
             <div className="flex items-center gap-3 mt-5">

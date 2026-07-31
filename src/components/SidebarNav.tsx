@@ -66,7 +66,7 @@ const SidebarNav = () => {
         </div>
       </div>
 
-      <nav className="flex flex-col gap-0.5 flex-1">
+      <nav className="flex flex-col gap-0.5">
         {navItems.map((item) => (
           <a
             key={item.id}
@@ -81,7 +81,7 @@ const SidebarNav = () => {
         ))}
       </nav>
 
-      <div className="mt-auto pt-4 border-t border-border space-y-3">
+      <div className="mt-6 pt-4 border-t border-border space-y-3">
         <div className="flex items-center gap-2">
           <a
             href="https://www.linkedin.com/in/vinnakota-sainath"

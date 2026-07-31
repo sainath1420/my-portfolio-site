@@ -48,7 +48,7 @@ const SkillsSection = () => {
 
   return (
     <section id="skills" ref={sectionRef} className="py-32">
-      <div className="container max-w-5xl mx-auto px-4 lg:pl-56">
+      <div className="container max-w-5xl mx-auto px-4">
         <div ref={headingRef}>
           <p className="section-subtitle">What I Do</p>
           <h2 className="section-heading mt-3">Full-Stack AI Engineering</h2>

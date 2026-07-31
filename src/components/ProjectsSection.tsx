@@ -90,15 +90,15 @@ const ProjectsSection = () => {
     <section id="projects" ref={sectionRef} className="relative overflow-hidden">
       <div className="h-screen flex flex-col justify-center">
         {/* Header */}
-        <div className="px-8 lg:pl-56 mb-8">
+        <div className="px-8 lg:pl-8 mb-8">
           <p className="section-subtitle">What I've Built</p>
           <h2 className="text-4xl md:text-5xl font-black font-heading text-foreground mt-2">
-            Made to Perform
+            Projects
           </h2>
         </div>
 
         {/* Horizontal track */}
-        <div ref={trackRef} className="flex gap-6 px-8 lg:pl-56 pr-16 will-change-transform">
+        <div ref={trackRef} className="flex gap-6 px-8 lg:pl-8 pr-16 will-change-transform">
           {projects.map((project) => (
             <div
               key={project.title}

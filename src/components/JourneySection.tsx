@@ -72,10 +72,10 @@ const JourneySection = () => {
     const cards = cardsRef.current.filter(Boolean);
 
     cards.forEach((card, i) => {
-      const fromLeft = i % 2 === 0;
+      const fromRight = i % 2 === 0;
       gsap.fromTo(
         card,
-        { opacity: 0, x: fromLeft ? -60 : 60, y: 30 },
+        { opacity: 0, x: fromRight ? 60 : -60, y: 30 },
         {
           opacity: 1,
           x: 0,
@@ -112,7 +112,7 @@ const JourneySection = () => {
   return (
     <section id="about" ref={sectionRef} className="py-32 relative">
       <div className="container max-w-5xl mx-auto px-4">
-        <div className="text-center mb-20">
+        <div className="mb-20">
           <p className="section-subtitle">START SMALL GROW BIG</p>
           <h2 className="section-heading mt-3">About Me (&)<br/>My Journey</h2>
         </div>
@@ -149,12 +149,12 @@ const JourneySection = () => {
           {/* Cards */}
           <div className="space-y-12 md:space-y-20 relative z-10">
             {milestones.map((m, i) => {
-              const isLeft = i % 2 === 0;
+              const isRight = i % 2 === 0;
               return (
                 <div
                   key={m.year + m.title}
                   ref={(el) => { if (el) cardsRef.current[i] = el; }}
-                  className={`flex ${isLeft ? "md:justify-start" : "md:justify-end"}`}
+                  className={`flex ${isRight ? "md:justify-end" : "md:justify-start"}`}
                 >
                   <div className="w-full md:w-[55%]">
                     <FlipCard
