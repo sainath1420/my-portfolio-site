@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Home, User, Briefcase, Code2, Award, Mail, Menu, X, FileDown, Github, Linkedin, Phone } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
   { id: "home", label: "HOME", icon: Home, href: "#home" },
@@ -13,7 +17,7 @@ const navItems = [
 const SidebarNav = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const sidebarRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,12 +40,23 @@ const SidebarNav = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > window.innerHeight * 0.7);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (!sidebarRef.current) return;
+
+    gsap.set(sidebarRef.current, { x: "-100%" });
+
+    const heroSection = document.getElementById("home");
+    if (!heroSection) return;
+
+    gsap.to(sidebarRef.current, {
+      x: "0%",
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: heroSection,
+        start: "top top",
+        end: "+=150%",
+        scrub: 1,
+      },
+    });
   }, []);
 
   const NavContent = () => (
@@ -122,11 +137,10 @@ const SidebarNav = () => {
 
   return (
     <>
-      {/* Desktop sidebar - animates in after scroll */}
+      {/* Desktop sidebar - slides in via GSAP on scroll */}
       <aside
-        className={`hidden lg:flex fixed left-0 top-0 bottom-0 w-48 z-40 flex-col p-5 border-r border-border bg-background/95 backdrop-blur-sm transition-transform duration-500 ease-out ${
-          visible ? "translate-x-0" : "-translate-x-full"
-        }`}
+        ref={sidebarRef}
+        className="hidden lg:flex fixed left-0 top-0 bottom-0 w-48 z-40 flex-col p-5 border-r border-border bg-background/95 backdrop-blur-sm"
       >
         <NavContent />
       </aside>

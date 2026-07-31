@@ -88,7 +88,7 @@ const CertsAwardsSection = () => {
               <FlipCard
                 heightClass="h-60"
                 front={
-                  <div className="h-full flex flex-col justify-center p-6 bg-card">
+                  <div className="h-full flex flex-col justify-center p-6 bg-card border border-border rounded-xl">
                     <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                       <Award size={22} className="text-primary" />
                     </div>
@@ -101,7 +101,7 @@ const CertsAwardsSection = () => {
                   <button
                     type="button"
                     onClick={() => a.image && setLightbox({ image: a.image, title: a.title })}
-                    className="group/back relative h-full w-full overflow-hidden bg-card p-3"
+                    className="group/back relative h-full w-full overflow-hidden bg-card border border-border rounded-xl p-3"
                   >
                     <img src={a.image} alt={a.title} className="h-full w-full object-contain rounded-lg" loading="lazy" />
                     <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover/back:bg-black/40 transition-colors">
@@ -127,7 +127,7 @@ const CertsAwardsSection = () => {
               <FlipCard
                 heightClass="h-64"
                 front={
-                  <div className="h-full flex flex-col justify-center p-5 bg-card">
+                  <div className="h-full flex flex-col justify-center p-5 bg-card border border-border rounded-xl">
                     <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
                       <BadgeCheck size={18} className="text-primary" />
                     </div>
@@ -140,7 +140,7 @@ const CertsAwardsSection = () => {
                   <button
                     type="button"
                     onClick={() => c.image && setLightbox({ image: c.image, title: c.title })}
-                    className="group/back relative h-full w-full overflow-hidden bg-card p-2"
+                    className="group/back relative h-full w-full overflow-hidden bg-card border border-border rounded-xl p-2"
                   >
                     <img src={c.image} alt={c.title} className="h-full w-full object-contain rounded-lg" loading="lazy" />
                     <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover/back:bg-black/40 transition-colors">

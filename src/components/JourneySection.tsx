@@ -1,191 +1,245 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import FlipCard from "@/components/FlipCard";
+import { Youtube, GraduationCap, Building2, Trophy, Rocket, Briefcase, X } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const milestones = [
   {
-    year: "'19",
+    year: "2019",
     title: "Started College",
     description: "B.Tech in Computer Science at DMS SVH College of Engineering, Machilipatnam.",
-    image: "/assets/college-logo.png",
-    color: "bg-amber-500/15",
+    logo: "/assets/college-logo.png",
+    icon: GraduationCap,
+    gradient: "from-amber-500/20 to-transparent",
+    dot: "bg-amber-400",
   },
   {
-    year: "'20",
+    year: "2020",
     title: "YouTube Era Begins",
     description: "Launched \"Sainath Roy Gaming\" — streaming and content creation, building a community from scratch.",
-    image: "/assets/gaming-logo.png",
-    color: "bg-red-500/15",
+    icon: Youtube,
+    gradient: "from-red-500/20 to-transparent",
+    dot: "bg-red-400",
+    thumbnail: "/assets/gaming-logo.png",
   },
   {
-    year: "'21",
+    year: "2021",
     title: "50K Subscribers",
     description: "Hit the 50,000 subscriber milestone. Learned consistency, audience building, and content strategy.",
-    image: "/assets/youtube-50k.png",
-    color: "bg-rose-500/15",
+    icon: Youtube,
+    gradient: "from-rose-500/20 to-transparent",
+    dot: "bg-rose-400",
+    thumbnail: "/assets/youtube-50k.png",
   },
   {
-    year: "'22",
+    year: "2022",
     title: "Career Begins",
     description: "Graduated B.Tech, quit YouTube, and joined Smart IMS as a Python developer intern.",
-    image: "/assets/smartims.png",
-    color: "bg-blue-500/15",
+    logo: "/assets/smartims.png",
+    icon: Building2,
+    gradient: "from-blue-500/20 to-transparent",
+    dot: "bg-blue-400",
+    showcase: { image: "/assets/smartims.png", bg: "bg-blue-950", border: "border-blue-500/50" },
   },
   {
-    year: "'23",
+    year: "2023",
     title: "Full-time Engineer",
     description: "Promoted to Associate Engineer 1. Built microservices, REST APIs, and backend systems with FastAPI.",
-    color: "bg-emerald-500/15",
+    logo: "/assets/smartims.png",
+    icon: Briefcase,
+    gradient: "from-emerald-500/20 to-transparent",
+    dot: "bg-emerald-400",
+    showcase: { image: "/assets/smartims.png", bg: "bg-blue-950", border: "border-blue-500/50" },
   },
   {
-    year: "'24",
+    year: "2024",
     title: "Extra Miler Award",
     description: "Recognised for exceptional dedication and outstanding contributions to enterprise projects.",
-    image: "/assets/award-extra-miler.png",
-    color: "bg-purple-500/15",
+    icon: Trophy,
+    gradient: "from-purple-500/20 to-transparent",
+    dot: "bg-purple-400",
   },
   {
-    year: "'25",
+    year: "2025",
     title: "The AI Pivot",
     description: "Dove deep into Generative AI — RAG, agents, voice AI. Awarded Difference Maker. Promoted to SE1.",
-    image: "/assets/award-difference-maker.png",
-    color: "bg-orange-500/15",
+    icon: Rocket,
+    gradient: "from-orange-500/20 to-transparent",
+    dot: "bg-orange-400",
   },
   {
-    year: "'26",
+    year: "2026",
     title: "BHP — AI Engineer",
     description: "Joined BHP, one of the world's largest resources companies, as an AI Engineer in Gurugram, India.",
-    image: "/assets/bhp.png",
-    color: "bg-orange-600/15",
+    logo: "/assets/bhp.png",
+    icon: Building2,
+    gradient: "from-orange-600/20 to-transparent",
+    dot: "bg-orange-500",
+    showcase: { image: "/assets/bhp.png", bg: "bg-orange-950", border: "border-orange-500/50" },
   },
 ];
 
+type LightboxItem = { image: string; title: string; bg?: string; border?: string } | null;
+
 const JourneySection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
+  const [lightbox, setLightbox] = useState<LightboxItem>(null);
 
   useEffect(() => {
-    const cards = cardsRef.current.filter(Boolean);
+    const ctx = gsap.context(() => {
+      const cards = cardsRef.current.filter(Boolean);
 
-    cards.forEach((card, i) => {
-      const fromRight = i % 2 === 0;
-      gsap.fromTo(
-        card,
-        { opacity: 0, x: fromRight ? 60 : -60, y: 30 },
-        {
-          opacity: 1,
-          x: 0,
-          y: 0,
-          duration: 0.7,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 82%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    });
-
-    if (pathRef.current) {
-      const length = pathRef.current.getTotalLength();
-      gsap.set(pathRef.current, { strokeDasharray: length, strokeDashoffset: length });
-      gsap.to(pathRef.current, {
-        strokeDashoffset: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 50%",
-          end: "bottom 70%",
-          scrub: 1,
-        },
+      cards.forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 40, scale: 0.96 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
       });
-    }
 
-    return () => { ScrollTrigger.getAll().forEach(t => t.kill()); };
+      if (lineRef.current) {
+        gsap.fromTo(
+          lineRef.current,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 40%",
+              end: "bottom 70%",
+              scrub: 1,
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setLightbox(null);
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [lightbox]);
 
   return (
     <section id="about" ref={sectionRef} className="py-32 relative">
       <div className="container max-w-5xl mx-auto px-4">
-        <div className="mb-20">
+        <div className="mb-16">
           <p className="section-subtitle">START SMALL GROW BIG</p>
-          <h2 className="section-heading mt-3">About Me (&)<br/>My Journey</h2>
+          <h2 className="section-heading mt-3">About Me (&)<br />My Journey</h2>
         </div>
 
-        <div className="relative">
-          {/* Curved SVG connecting path */}
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-            preserveAspectRatio="none"
-            viewBox="0 0 800 2400"
-            fill="none"
-          >
-            <path
-              ref={pathRef}
-              d="M 650 50 C 700 150, 150 200, 150 300 C 150 400, 700 450, 650 550 C 600 650, 150 700, 150 800 C 150 900, 700 950, 650 1050 C 600 1150, 150 1200, 150 1300 C 150 1400, 700 1450, 650 1550 C 600 1650, 150 1700, 150 1800 C 150 1900, 700 1950, 650 2050"
-              stroke="hsl(var(--primary))"
-              strokeWidth="2"
-              strokeLinecap="round"
-              opacity="0.6"
+        {/* Timeline */}
+        <div className="relative ml-4 md:ml-8">
+          {/* Animated vertical line */}
+          <div className="absolute left-4 md:left-5 top-0 bottom-0 w-[2px]">
+            <div
+              ref={lineRef}
+              className="w-full h-full origin-top"
+              style={{
+                background: "linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--primary) / 0.3), transparent)",
+              }}
             />
-            {/* Dots at each milestone */}
-            {[50, 300, 550, 800, 1050, 1300, 1550, 1800].map((y, i) => (
-              <circle
-                key={i}
-                cx={i % 2 === 0 ? 650 : 150}
-                cy={y}
-                r="6"
-                fill="hsl(var(--primary))"
-                opacity="0.8"
-              />
-            ))}
-          </svg>
+          </div>
 
           {/* Cards */}
-          <div className="space-y-12 md:space-y-20 relative z-10">
+          <div className="space-y-6">
             {milestones.map((m, i) => {
-              const isRight = i % 2 === 0;
+              const Icon = m.icon;
               return (
                 <div
                   key={m.year + m.title}
                   ref={(el) => { if (el) cardsRef.current[i] = el; }}
-                  className={`flex ${isRight ? "md:justify-end" : "md:justify-start"}`}
+                  className="relative pl-14 md:pl-16"
                 >
-                  <div className="w-full md:w-[55%]">
-                    <FlipCard
-                      heightClass="min-h-[14rem]"
-                      front={
-                        <div className={`h-full flex flex-col justify-center p-7 ${m.color}`}>
-                          <span className="text-4xl md:text-5xl font-black text-primary/80 font-heading leading-none">
-                            {m.year}
-                          </span>
-                          <h3 className="text-xl font-bold text-foreground mt-3 font-heading">{m.title}</h3>
-                          <p className="text-sm text-muted-foreground leading-relaxed mt-2">{m.description}</p>
-                        </div>
-                      }
-                      back={
-                        <div className={`h-full flex items-center justify-center p-4 ${m.color}`}>
-                          {m.image ? (
-                            <img
-                              src={m.image}
-                              alt={m.title}
-                              className="max-h-40 max-w-full object-contain rounded-lg"
-                              loading="lazy"
-                            />
+                  {/* Dot on the line */}
+                  <div className={`absolute left-[10px] md:left-[14px] top-8 w-4 h-4 rounded-full ${m.dot} border-4 border-background z-10 shadow-lg`} />
+
+                  {/* Horizontal connector */}
+                  <div className="absolute left-[26px] md:left-[30px] top-[22px] w-6 md:w-8 h-[2px] bg-gradient-to-r from-primary/60 to-transparent" />
+
+                  {/* Card */}
+                  <div className={`group relative rounded-2xl border border-border/60 bg-card overflow-hidden hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5`}>
+                    {/* Gradient accent bar */}
+                    <div className={`absolute inset-0 bg-gradient-to-r ${m.gradient} pointer-events-none`} />
+
+                    <div className="relative p-6 md:p-7">
+                      <div className="flex items-start gap-4">
+                        {/* Icon/Logo */}
+                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/30 transition-colors">
+                          {m.logo ? (
+                            <img src={m.logo} alt={m.title} className="w-7 h-7 object-contain" />
                           ) : (
-                            <div className="text-center">
-                              <span className="text-6xl font-black text-primary/40">{m.year}</span>
-                              <p className="text-sm text-muted-foreground mt-2">{m.title}</p>
-                            </div>
+                            <Icon size={22} className="text-primary" />
                           )}
                         </div>
-                      }
-                    />
+
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-3 flex-wrap">
+                            <span className="text-xs font-bold uppercase tracking-widest text-primary/70 bg-primary/10 px-2.5 py-1 rounded-full">
+                              {m.year}
+                            </span>
+                            <h3 className="text-lg font-bold text-foreground font-heading">{m.title}</h3>
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed mt-2.5">{m.description}</p>
+
+                          {/* Thumbnail image (clickable) */}
+                          {m.thumbnail && (
+                            <button
+                              type="button"
+                              onClick={() => setLightbox({ image: m.thumbnail!, title: m.title })}
+                              className="mt-3 rounded-lg overflow-hidden border border-border/60 hover:border-primary/50 transition-colors inline-block"
+                            >
+                              <img
+                                src={m.thumbnail}
+                                alt={m.title}
+                                className="h-14 w-auto object-contain bg-white/5 p-1.5"
+                                loading="lazy"
+                              />
+                            </button>
+                          )}
+
+                          {/* Showcase logo (bigger, clickable) */}
+                          {m.showcase && (
+                            <button
+                              type="button"
+                              onClick={() => setLightbox({ image: m.showcase!.image, title: m.title, bg: m.showcase!.bg, border: m.showcase!.border })}
+                              className={`mt-4 rounded-xl overflow-hidden border ${m.showcase.border} hover:scale-105 transition-transform inline-block ${m.showcase.bg} p-4`}
+                            >
+                              <img
+                                src={m.showcase.image}
+                                alt={m.title}
+                                className="h-12 md:h-16 w-auto object-contain"
+                                loading="lazy"
+                              />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               );
@@ -193,6 +247,28 @@ const JourneySection = () => {
           </div>
         </div>
       </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-5 right-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+            onClick={() => setLightbox(null)}
+          >
+            <X size={22} />
+          </button>
+          <div
+            className={`max-w-lg w-full rounded-3xl p-12 flex flex-col items-center justify-center ${lightbox.bg || "bg-card"} border ${lightbox.border || "border-border"}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={lightbox.image} alt={lightbox.title} className="w-full max-h-[50vh] object-contain" />
+            <p className="text-center text-lg font-bold text-white mt-6">{lightbox.title}</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
