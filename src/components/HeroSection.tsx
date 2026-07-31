@@ -1,91 +1,111 @@
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Phone } from "lucide-react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import avatarImg from "@/assets/sainath-photo.jpg";
 
+gsap.registerPlugin(ScrollTrigger);
+
+const traits = ["Creative", "Reliable", "Strategist", "Builder", "Efficient"];
+
 const HeroSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const bgTextRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const bgText = bgTextRef.current;
+    const image = imageRef.current;
+    const content = contentRef.current;
+    if (!section || !bgText || !image || !content) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+        pin: false,
+      },
+    });
+
+    tl.to(bgText, { filter: "blur(0px)", opacity: 0.85 }, 0);
+    tl.to(image, { filter: "blur(12px)", scale: 0.95, opacity: 0.4 }, 0);
+    tl.to(content, { y: -60, opacity: 0 }, 0.3);
+
+    return () => { tl.kill(); ScrollTrigger.getAll().forEach(t => t.kill()); };
+  }, []);
+
   return (
-    <section className="min-h-screen flex items-center pt-16">
-      <div className="container grid md:grid-cols-2 gap-12 items-center">
-        <div className="flex flex-col gap-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-4xl md:text-6xl font-bold font-heading tracking-tight text-foreground leading-tight"
-          >
-            Hi, I'm{" "}
-            <span className="text-primary">Sainath</span>
-          </motion.h1>
+    <section
+      id="home"
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Large background text */}
+      <div
+        ref={bgTextRef}
+        aria-hidden="true"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+        style={{ filter: "blur(6px)", opacity: 0.15 }}
+      >
+        <span className="hero-text text-primary whitespace-nowrap">SAINATH</span>
+      </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-            className="text-lg text-muted-foreground leading-relaxed max-w-lg"
-          >
-            AI Engineer with 4 years of experience building Generative AI systems —
-            RAG pipelines, AI agents, real-time voice agents, and Python backends.
-          </motion.p>
+      {/* Person cutout image */}
+      <div
+        ref={imageRef}
+        className="absolute inset-0 flex items-end justify-center pointer-events-none"
+      >
+        <img
+          src={avatarImg}
+          alt="Sainath"
+          className="h-[70vh] md:h-[80vh] w-auto max-w-none object-cover object-top"
+          style={{ maskImage: "linear-gradient(to top, transparent 0%, black 20%)" }}
+        />
+      </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="flex flex-col gap-3 pt-2"
-          >
-            <p className="text-sm text-muted-foreground">Let's connect</p>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/in/vinnakota-sainath"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="LinkedIn"
-                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground hover:text-[#0A66C2] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5 transition-all duration-200"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href="https://github.com/sainath1420"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="GitHub"
-                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-200"
-              >
-                <Github size={18} />
-              </a>
-              <a
-                href="mailto:kasisainath14@gmail.com"
-                title="Email"
-                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground hover:text-[#EA4335] hover:border-[#EA4335]/40 hover:bg-[#EA4335]/5 transition-all duration-200"
-              >
-                <Mail size={18} />
-              </a>
-              <a
-                href="tel:+919133839569"
-                title="Call"
-                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground hover:text-emerald-500 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all duration-200"
-              >
-                <Phone size={18} />
-              </a>
-            </div>
-          </motion.div>
+      {/* Content overlay */}
+      <div ref={contentRef} className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <h1 className="text-display text-foreground mb-4">
+          AI, Applied<br />
+          <span className="text-primary">Differently.</span>
+        </h1>
+
+        <div className="flex flex-wrap justify-center gap-3 mt-8">
+          {traits.map((trait) => (
+            <span
+              key={trait}
+              className="px-4 py-1.5 rounded-full border border-primary/30 text-sm font-medium text-primary bg-primary/5"
+            >
+              {trait}
+            </span>
+          ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="flex justify-center md:justify-end"
-        >
-          <div className="relative w-72 h-72 md:w-96 md:h-96">
-            <div className="absolute inset-0 bg-primary/10 rounded-full blur-3xl" />
-            <img
-              src={avatarImg}
-              alt="Sainath - AI Engineer"
-              className="relative w-full h-full object-cover rounded-2xl border border-border/60 shadow-xl"
-            />
+        <div className="flex items-center justify-center gap-8 mt-10 text-sm">
+          <div className="text-center">
+            <span className="text-2xl font-bold text-primary">4+</span>
+            <p className="text-muted-foreground text-xs mt-0.5">Years of<br/>experience</p>
           </div>
-        </motion.div>
+          <div className="text-center">
+            <span className="text-2xl font-bold text-primary">10+</span>
+            <p className="text-muted-foreground text-xs mt-0.5">Projects<br/>delivered</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Nav hints - bottom left/right */}
+      <div className="absolute bottom-8 left-8 hidden lg:flex flex-col gap-1 text-xs text-muted-foreground">
+        <span>HOME</span>
+        <span>ABOUT ME</span>
+        <span>PROJECTS</span>
+      </div>
+      <div className="absolute bottom-8 right-8 hidden lg:flex flex-col gap-1 text-xs text-muted-foreground text-right">
+        <span>SKILLS</span>
+        <span>CERTS</span>
+        <span>CONTACT</span>
       </div>
     </section>
   );

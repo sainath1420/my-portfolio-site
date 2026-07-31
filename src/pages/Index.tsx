@@ -1,27 +1,31 @@
-import Navbar from "@/components/Navbar";
+import { useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
+import SidebarNav from "@/components/SidebarNav";
 import HeroSection from "@/components/HeroSection";
-import SkillsSection from "@/components/SkillsSection";
-import ExperienceSection from "@/components/ExperienceSection";
+import JourneySection from "@/components/JourneySection";
 import ProjectsSection from "@/components/ProjectsSection";
-import EducationSection from "@/components/EducationSection";
-import Footer from "@/components/Footer";
+import SkillsSection from "@/components/SkillsSection";
+import CertsAwardsSection from "@/components/CertsAwardsSection";
+import FooterContact from "@/components/FooterContact";
 
 const Index = () => {
+  const [loaded, setLoaded] = useState(false);
+
   return (
-    <div className="min-h-screen bg-background ambient-bg">
-      <div className="ambient-orbs" aria-hidden="true">
-        <span />
-        <span />
-        <span />
+    <>
+      {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
+      <div className={`min-h-screen bg-background ${loaded ? "" : "overflow-hidden h-screen"}`}>
+        <SidebarNav />
+        <main className="lg:ml-48">
+          <HeroSection />
+          <JourneySection />
+          <ProjectsSection />
+          <SkillsSection />
+          <CertsAwardsSection />
+          <FooterContact />
+        </main>
       </div>
-      <Navbar />
-      <HeroSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <EducationSection />
-      <Footer />
-    </div>
+    </>
   );
 };
 
